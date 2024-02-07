@@ -51,3 +51,9 @@ export const editTask = async (req, res) => {
 
   return res.status(200).json(task);
 };
+
+export const deleteTask = async (req, res) => {
+  const findTask = await Task.findByIdAndDelete({ _id: req.params._id });
+
+  return res.status(200).json(findTask);
+};
