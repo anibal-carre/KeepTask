@@ -7,6 +7,7 @@ import dotenv from "dotenv";
 import authRoutes from "./routes/auth.js";
 import User from "./models/User.js";
 import { verifyToken } from "./middleware/auth.js";
+import taskRoutes from "./routes/task.js";
 
 dotenv.config();
 const app = express();
@@ -17,6 +18,7 @@ app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(cors());
 app.use("/auth", authRoutes);
+app.use("/tasks", taskRoutes);
 
 app.get("/users", verifyToken, async (req, res) => {
   const users = await User.find();
