@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-const HeroSection = () => {
+const HeroSection = ({ navigate }) => {
   const titleAnimation = {
     initial: {
       opacity: 0.2,
@@ -40,6 +40,7 @@ const HeroSection = () => {
           animate="animate"
           transition={{ ease: "easeInOut", duration: 0.9 }}
           className="w-[250px] h-[50px] bg-blue-400 text-[18px] font-[600] text-white rounded-[8px] mt-20 hover:bg-blue-300"
+          onClick={() => navigate("/auth/login")}
         >
           Get started
         </motion.button>

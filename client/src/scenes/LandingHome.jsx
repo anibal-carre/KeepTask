@@ -2,8 +2,10 @@ import Navbar from "../components/LandingHome/Navbar";
 import { useContext } from "react";
 import DataContext from "../state/DataContext";
 import HeroSection from "../components/LandingHome/HeroSection";
+import { useNavigate } from "react-router-dom";
 
 const LandingHome = () => {
+  const navigate = useNavigate();
   const { theme } = useContext(DataContext);
 
   return (
@@ -13,10 +15,10 @@ const LandingHome = () => {
       }`}
     >
       <header className="w-full">
-        <Navbar />
+        <Navbar navigate={navigate} />
       </header>
 
-      <HeroSection />
+      <HeroSection navigate={navigate} />
     </div>
   );
 };

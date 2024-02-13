@@ -7,7 +7,7 @@ import { useContext } from "react";
 import DataContext from "../../state/DataContext";
 import SunIcon from "../Icons/SunIcon";
 
-const Navbar = () => {
+const Navbar = ({ navigate }) => {
   const { theme, setTheme } = useContext(DataContext);
   return (
     <nav
@@ -49,7 +49,10 @@ const Navbar = () => {
 
             <div className="w-[2px] rounded-sm h-[45px] bg-blue-300 mr-2 "></div>
 
-            <button className="w-[100px] h-[40px] flex justify-center items-center bg-blue-400 hover:bg-blue-300 rounded-[8px] text-[18px] font-[600] text-white">
+            <button
+              onClick={() => navigate("/auth/login")}
+              className="w-[100px] h-[40px] flex justify-center items-center bg-blue-400 hover:bg-blue-300 rounded-[8px] text-[18px] font-[600] text-white"
+            >
               <AccountIcon />
             </button>
             <div className="w-[2px] rounded-sm h-[45px] bg-blue-300 mr-2 ml-2"></div>
