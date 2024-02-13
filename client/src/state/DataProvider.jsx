@@ -1,9 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import DataContext from "./DataContext";
 
 const DataProvider = ({ children }) => {
-  const [theme, setTheme] = useState("light");
+  const storedTheme = localStorage.getItem("theme");
+  const [theme, setTheme] = useState(storedTheme || "light");
+
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
   return (
     <DataContext.Provider value={{ theme, setTheme }}>

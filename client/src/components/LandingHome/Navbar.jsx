@@ -47,17 +47,24 @@ const Navbar = () => {
               </span>
             </li>
 
-            <div className="w-[2px] rounded-sm h-[45px] bg-blue-300 mr-2"></div>
+            <div className="w-[2px] rounded-sm h-[45px] bg-blue-300 mr-2 "></div>
 
             <button className="w-[100px] h-[40px] flex justify-center items-center bg-blue-400 hover:bg-blue-300 rounded-[8px] text-[18px] font-[600] text-white">
               <AccountIcon />
             </button>
+            <div className="w-[2px] rounded-sm h-[45px] bg-blue-300 mr-2 ml-2"></div>
 
-            {theme == "light" ? (
-              <MoonIcon setTheme={setTheme} />
-            ) : (
-              <SunIcon setTheme={setTheme} />
-            )}
+            <div
+              className={`w-[40px] h-[40px] flex items-center justify-center rounded-[50%] ${
+                theme == "light" ? "hover:bg-zinc-300" : "hover:bg-zinc-700"
+              } hover:transition-all`}
+            >
+              {theme == "light" ? (
+                <MoonIcon setTheme={setTheme} />
+              ) : (
+                <SunIcon setTheme={setTheme} />
+              )}
+            </div>
           </ul>
         </nav>
       </div>
