@@ -1,7 +1,10 @@
 import Navbar from "../components/LandingHome/Navbar";
-import { animate, motion } from "framer-motion";
+import { motion } from "framer-motion";
+import { useContext } from "react";
+import DataContext from "../state/DataContext";
 
 const LandingHome = () => {
+  const { theme } = useContext(DataContext);
   const titleAnimation = {
     initial: {
       opacity: 0.2,
@@ -13,7 +16,11 @@ const LandingHome = () => {
     },
   };
   return (
-    <div className="w-full h-scree">
+    <div
+      className={`w-full h-screen ${
+        theme == "dark" ? "bg-zinc-900" : "bg-white"
+      }`}
+    >
       <header className="w-full">
         <Navbar />
       </header>

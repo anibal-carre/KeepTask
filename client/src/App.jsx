@@ -1,12 +1,15 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LandingHome from "./scenes/LandingHome";
+import DataProvider from "./state/DataProvider";
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<LandingHome />} />
-      </Routes>
-    </BrowserRouter>
+    <DataProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<LandingHome />} />
+        </Routes>
+      </BrowserRouter>
+    </DataProvider>
   );
 }
 
