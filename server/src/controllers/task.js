@@ -12,6 +12,7 @@ export const createTask = async (req, res) => {
       text_color: "text-black",
       text_font: "font-mono",
       fixed: false,
+      trash: false,
       created_at: Date.now(),
       updated_at: Date.now(),
     });
@@ -46,6 +47,7 @@ export const editTask = async (req, res) => {
     text_color: req.body.text_color ? req.body.text_color : "color-black",
     text_font: req.body.text_font ? req.body.text_font : "font-mono",
     fixed: req.body.fixed ? req.body.fixed : false,
+    trash: false,
     updated_at: Date.now(),
   });
 

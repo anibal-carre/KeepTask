@@ -27,6 +27,10 @@ const TaskSchema = mongoose.Schema({
     type: Boolean,
     required: true,
   },
+  trash: {
+    type: Boolean,
+    required: true,
+  },
   created_at: {
     type: Date,
   },
