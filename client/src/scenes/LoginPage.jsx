@@ -2,11 +2,20 @@ import { motion } from "framer-motion";
 import NoteIcon from "../components/Icons/NoteIcon";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
+import { useState } from "react";
 import DataContext from "../state/DataContext";
+import useApi from "../hooks/useApi";
 
 const LoginPage = () => {
   const { theme } = useContext(DataContext);
+  const { login } = useApi({});
   const navigate = useNavigate();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [error, setError] = useState(false);
+
   const inputAnimation = {
     initial: {
       opacity: 0.2,
@@ -17,6 +26,30 @@ const LoginPage = () => {
       y: 0,
     },
   };
+
+  // LOGIN LOGIC -------------------------
+
+  const handleLogin = async (e) => {
+    try {
+      e.preventDefault();
+      const userData = { email, password };
+      const loginResponse = await login(userData);
+
+      setError(false);
+
+      console.log(`Inicio de sesion exitoso: ${loginResponse}`);
+
+      setTimeout(() => {
+        navigate("/home");
+      });
+    } catch (error) {
+      setError(true);
+      console.error(
+        `Error en el inicio de sesion desde el component: ${error}`
+      );
+    }
+  };
+
   return (
     <div
       className={`w-screen h-screen flex flex-col justify-center items-center ${
@@ -45,7 +78,17 @@ const LoginPage = () => {
         </span>
       </motion.div>
 
-      <form className="w-full flex flex-col gap-8 md:w-[600px] h-[700px] py-10 px-14 md:px-20">
+      <form
+        onSubmit={handleLogin}
+        className="w-full flex flex-col gap-8 md:w-[600px] h-[700px] py-10 px-14 md:px-20"
+      >
+        <span
+          className={`${
+            error ? "flex" : "hidden"
+          } text-[16px] text-red-400 font-[600]`}
+        >
+          Email or Password Invalid
+        </span>
         <motion.div
           variants={inputAnimation}
           initial="initial"
@@ -55,11 +98,12 @@ const LoginPage = () => {
         >
           <span className="text-[16px] font-[600]">Email</span>
           <input
-            className={`h-[45px] rounded-[5px] border border-black font-[500] px-3 ${
+            className={`h-[45px] rounded-[5px] border font-[500] px-3 ${
               theme == "light" ? "bg-white" : "bg-zinc-800"
-            }`}
+            }  ${error ? "border-red-600" : " border-black"}`}
             type="text"
             placeholder="Enter your email"
+            onChange={(e) => setEmail(e.target.value)}
           />
         </motion.div>
         <motion.div
@@ -71,11 +115,12 @@ const LoginPage = () => {
         >
           <span className="text-[16px] font-[600]">Password</span>
           <input
-            className={`h-[45px] rounded-[5px] border border-black font-[500] px-3 ${
+            className={`h-[45px] rounded-[5px] border font-[500] px-3 ${
               theme == "light" ? "bg-white" : "bg-zinc-800"
-            }`}
+            } ${error ? "border-red-600" : " border-black"}`}
             type="password"
             placeholder="Enter your password"
+            onChange={(e) => setPassword(e.target.value)}
           />
         </motion.div>
 
