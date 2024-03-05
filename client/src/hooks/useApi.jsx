@@ -40,9 +40,11 @@ const useApi = (initialConfig) => {
     }
   };
 
-  const register = async () => {
+  const register = async (userData) => {
     try {
-      const response = await axios.post(`${AuthURL}/register`);
+      const response = await axios.post(`${AuthURL}/register`, userData);
+
+      return response.data;
     } catch (error) {
       console.log(`Error al registrar usuario:, ${error}`);
       throw error;

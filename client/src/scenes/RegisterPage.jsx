@@ -2,11 +2,26 @@ import { motion } from "framer-motion";
 import NoteIcon from "../components/Icons/NoteIcon";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
+import { useState } from "react";
 import DataContext from "../state/DataContext";
+import useApi from "../hooks/useApi";
 
 const RegisterPage = () => {
   const { theme } = useContext(DataContext);
   const navigate = useNavigate();
+
+  // Register Fuction
+
+  const { register } = useApi({});
+
+  // User Data
+  const [name, setName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  // Error
+  const [error, setError] = useState(false);
+
   const inputAnimation = {
     initial: {
       opacity: 0.2,
@@ -17,6 +32,30 @@ const RegisterPage = () => {
       y: 0,
     },
   };
+
+  const handleRegister = async (e) => {
+    try {
+      e.preventDefault();
+
+      const userData = {
+        name: name,
+        last_name: lastName,
+        email: email,
+        password: password,
+      };
+
+      const registerResponse = await register(userData);
+
+      console.log(`Registro exitoso:  ${registerResponse}`);
+      setTimeout(() => {
+        navigate("/auth/login");
+      }, 2000);
+    } catch (error) {
+      console.error(`Error al registrar informaciones: ${error}`);
+      setError(true);
+    }
+  };
+
   return (
     <div
       className={`w-screen h-screen flex flex-col justify-center items-center ${
@@ -45,7 +84,10 @@ const RegisterPage = () => {
         </span>
       </motion.div>
 
-      <form className="w-full flex flex-col gap-8 md:w-[600px] h-[760px] py-10 px-14 md:px-20">
+      <form
+        onSubmit={handleRegister}
+        className="w-full flex flex-col gap-8 md:w-[600px] h-[760px] py-10 px-14 md:px-20"
+      >
         <motion.div
           variants={inputAnimation}
           initial="initial"
@@ -60,6 +102,7 @@ const RegisterPage = () => {
             }`}
             type="text"
             placeholder="Enter your first name"
+            onChange={(e) => setName(e.target.value)}
           />
         </motion.div>
         <motion.div
@@ -76,6 +119,7 @@ const RegisterPage = () => {
             }`}
             type="text"
             placeholder="Enter your last name"
+            onChange={(e) => setLastName(e.target.value)}
           />
         </motion.div>
         <motion.div
@@ -92,6 +136,7 @@ const RegisterPage = () => {
             }`}
             type="text"
             placeholder="Enter your email"
+            onChange={(e) => setEmail(e.target.value)}
           />
         </motion.div>
         <motion.div
@@ -108,6 +153,7 @@ const RegisterPage = () => {
             }`}
             type="password"
             placeholder="Enter your password"
+            onChange={(e) => setPassword(e.target.value)}
           />
         </motion.div>
 

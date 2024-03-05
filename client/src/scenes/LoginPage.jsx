@@ -41,7 +41,7 @@ const LoginPage = () => {
 
       setTimeout(() => {
         navigate("/home");
-      });
+      }, 2000);
     } catch (error) {
       setError(true);
       console.error(
