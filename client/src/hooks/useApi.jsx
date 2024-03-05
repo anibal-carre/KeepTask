@@ -7,16 +7,16 @@ const useApi = (initialConfig) => {
   const [loading, setLoading] = useState(false);
   const [config, setConfig] = useState(initialConfig);
 
-  const LoginURL = "https://keeptask-backend.onrender.com/auth/login";
+  const baseURL = "https://keeptask-backend.onrender.com/";
+  const AuthURL = baseURL + "auth";
 
-  // Función de inicio de sesión
   const login = async (userData) => {
     try {
       setLoading(true);
       setError(null);
 
       // Realiza la solicitud al backend para autenticar al usuario
-      const response = await axios.post(LoginURL, userData);
+      const response = await axios.post(`${AuthURL}/login`, userData);
 
       // Extrae el token de la respuesta
       const token = response.data.token;
@@ -31,12 +31,21 @@ const useApi = (initialConfig) => {
       return response.data;
     } catch (error) {
       // Maneja errores, por ejemplo, mostrando un mensaje de error
-      console.error("Error en el inicio de sesión:", error);
+      console.error(`Error en el inicio de sesión:, ${error}`);
 
       // Puedes lanzar el error o manejarlo de alguna otra manera según tus necesidades
       throw error;
     } finally {
       setLoading(false);
+    }
+  };
+
+  const register = async () => {
+    try {
+      const response = await axios.post(`${AuthURL}/register`);
+    } catch (error) {
+      console.log(`Error al registrar usuario:, ${error}`);
+      throw error;
     }
   };
 
@@ -70,7 +79,7 @@ const useApi = (initialConfig) => {
   };
 
   // Devuelve la función de inicio de sesión junto con las otras propiedades y funciones del custom hook
-  return { data, error, loading, execute, login };
+  return { data, error, loading, execute, login, register };
 };
 
 export default useApi;
