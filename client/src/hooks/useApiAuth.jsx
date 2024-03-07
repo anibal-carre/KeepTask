@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const useApi = (initialConfig) => {
+const useApiAuth = (initialConfig) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -84,4 +84,4 @@ const useApi = (initialConfig) => {
   return { data, error, loading, execute, login, register };
 };
 
-export default useApi;
+export default useApiAuth;

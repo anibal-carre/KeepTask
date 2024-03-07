@@ -4,11 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { useState } from "react";
 import DataContext from "../state/DataContext";
-import useApi from "../hooks/useApi";
+import useApiAuth from "../hooks/useApiAuth";
 
 const LoginPage = () => {
   const { theme } = useContext(DataContext);
-  const { login } = useApi({});
+  const { login } = useApiAuth({});
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");

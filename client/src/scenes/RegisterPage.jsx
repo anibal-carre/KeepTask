@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { useState } from "react";
 import DataContext from "../state/DataContext";
-import useApi from "../hooks/useApi";
+import useApiAuth from "../hooks/useApiAuth";
 
 const RegisterPage = () => {
   const { theme } = useContext(DataContext);
@@ -12,7 +12,7 @@ const RegisterPage = () => {
 
   // Register Fuction
 
-  const { register } = useApi({});
+  const { register } = useApiAuth({});
 
   // User Data
   const [name, setName] = useState("");
