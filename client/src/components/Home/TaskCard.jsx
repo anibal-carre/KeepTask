@@ -1,5 +1,6 @@
 import { useState } from "react";
 import PinIcon from "../Icons/PinIcon";
+import TaskModal from "./TaskModal";
 const TaskCard = ({ cardConfig, titleConfig, textConfig }) => {
   const [isHovered, setIsHovered] = useState(false);
   return (
@@ -28,6 +29,8 @@ const TaskCard = ({ cardConfig, titleConfig, textConfig }) => {
         the last week i and my if family go to the beach with ours parents in
         california thwe last weekend whewr dffdfd wewew
       </p>
+
+      <TaskModal />
     </div>
   );
 };
