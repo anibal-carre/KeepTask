@@ -3,15 +3,15 @@
 @tailwind utilities;
 
 
-#cards-container::-webkit-scrollbar {
+#cards-container::-webkit-scrollbar, textarea::-webkit-scrollbar {
     width: 12px;
   }
   
-  #cards-container::-webkit-scrollbar-thumb {
+  #cards-container::-webkit-scrollbar-thumb, textarea::-webkit-scrollbar-thumb  {
     background-color: transparent; /* Color del thumb (barra deslizadora) */
     border-radius: 6px;
   }
   
-  #cards-container::-webkit-scrollbar-track {
+  #cards-container::-webkit-scrollbar-track, textarea::-webkit-scrollbar-track {
     background-color: transparent; /* Color de la pista del scrollbar */
   }
