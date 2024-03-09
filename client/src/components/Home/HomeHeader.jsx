@@ -8,10 +8,24 @@ import DataContext from "../../state/DataContext";
 import SunIcon from "../Icons/SunIcon";
 import ViewFlexIcon from "../Icons/ViewFlexIcon";
 import ViewGridIcon from "../Icons/ViewGridIcon";
+import useApiAuth from "@/src/hooks/useApiAuth";
+import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const HomeHeader = () => {
   const { theme, setTheme, viewStyle, setViewStyle } = useContext(DataContext);
-
+  const { logout } = useApiAuth();
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    try {
+      logout();
+      setTimeout(() => {
+        navigate("/auth/login");
+      }, 2000);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <header
       className={`w-full h-[80px]  flex items-center justify-between px-5 md:p-3 border border-zinc-200 ${
@@ -20,7 +34,7 @@ const HomeHeader = () => {
           : "bg-white shadow-md"
       }`}
     >
-      <div className="flex items-center">
+      <div className="flex items-center" onClick={handleLogout}>
         <motion.div
           animate={{
             scale: [1, 1, 2, 1, 1],

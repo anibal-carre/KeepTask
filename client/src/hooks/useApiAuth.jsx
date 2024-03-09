@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Navigate } from "react-router-dom";
 
 const useApiAuth = (initialConfig) => {
   const [data, setData] = useState(null);
@@ -51,6 +52,12 @@ const useApiAuth = (initialConfig) => {
     }
   };
 
+  //Logout Function
+
+  const logout = () => {
+    localStorage.removeItem("token");
+  };
+
   // Función para realizar solicitudes con la configuración actual
   const fetchData = async () => {
     try {
@@ -81,7 +88,7 @@ const useApiAuth = (initialConfig) => {
   };
 
   // Devuelve la función de inicio de sesión junto con las otras propiedades y funciones del custom hook
-  return { data, error, loading, execute, login, register };
+  return { data, error, loading, execute, login, register, logout };
 };
 
 export default useApiAuth;
