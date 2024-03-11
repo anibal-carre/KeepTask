@@ -9,7 +9,6 @@ import SunIcon from "../Icons/SunIcon";
 import ViewFlexIcon from "../Icons/ViewFlexIcon";
 import ViewGridIcon from "../Icons/ViewGridIcon";
 import useApiAuth from "@/src/hooks/useApiAuth";
-import { Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const HomeHeader = () => {

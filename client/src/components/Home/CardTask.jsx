@@ -1,9 +1,10 @@
-import { useState, useRef, useEffect } from "react";
-
+import { useState, useRef, useEffect, useContext } from "react";
+import DataContext from "@/src/state/DataContext";
 import PinIcon from "../Icons/PinIcon";
 import ModalTask from "./ModalTask";
 
 const CardTask = ({ children, cardConfig, titleConfig, textConfig }) => {
+  const { viewStyle, setViewStyle } = useContext(DataContext);
   const [isHovered, setIsHovered] = useState(false);
 
   const [modalOpen, setModalOpen] = useState(false);
@@ -37,7 +38,9 @@ const CardTask = ({ children, cardConfig, titleConfig, textConfig }) => {
         onClick={openModal}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        className={`w-full md:w-[200px] h-[450px] md:h-[350px] flex flex-col rounded-md  p-2 overflow-hidden  ${
+        className={`w-full ${
+          viewStyle == "flex" ? "md:w-[200px]" : "md:w-full"
+        }  h-[450px] md:h-[350px] flex flex-col rounded-md  p-2 overflow-hidden  ${
           isHovered ? "shadow-md shadow-zinc-500" : ""
         } ${cardConfig}`}
       >
