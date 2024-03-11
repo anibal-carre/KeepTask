@@ -1,13 +1,19 @@
+import { useContext } from "react";
+import DataContext from "@/src/state/DataContext";
 import CreateTaskBar from "../components/Home/CreateTaskBar";
-import HomeFooter from "../components/Home/HomeFooter";
 import HomeHeader from "../components/Home/HomeHeader";
 import TaskContainer from "../components/Home/TasksContainer";
 
 const HomePage = () => {
+  const { theme } = useContext(DataContext);
   return (
-    <div className="w-full h-screen flex flex-col items-center justify-center">
+    <div
+      className={`w-full h-screen flex flex-col items-center justify-center ${
+        theme == "dark" ? "bg-black" : "bg-white"
+      }`}
+    >
       <HomeHeader />
-      <CreateTaskBar />
+      <CreateTaskBar theme={theme} />
       <TaskContainer />
     </div>
   );
