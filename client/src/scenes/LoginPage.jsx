@@ -38,6 +38,7 @@ const LoginPage = () => {
       setError(false);
 
       console.log(`Inicio de sesion exitoso: ${loginResponse}`);
+      console.log(`Usuario ${loginResponse.user}`);
 
       setTimeout(() => {
         navigate("/home");

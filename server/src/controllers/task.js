@@ -2,15 +2,16 @@ import Task from "../models/Task.js";
 
 export const createTask = async (req, res) => {
   try {
-    const { user_id, title, description } = req.body;
+    const { user_id, title, description, bg_color, text_color, text_font } =
+      req.body;
 
     const newTask = new Task({
       user_id: user_id,
       title: title,
       description: description,
-      bg_color: "bg-black",
-      text_color: "text-black",
-      text_font: "font-mono",
+      bg_color: bg_color ? bg_color : "bg-black",
+      text_color: text_color ? text_color : "text-black",
+      text_font: text_font ? text_font : "font-mono",
       fixed: false,
       trash: false,
       created_at: Date.now(),

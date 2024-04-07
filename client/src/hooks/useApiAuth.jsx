@@ -18,8 +18,13 @@ const useApiAuth = (initialConfig) => {
       const response = await axios.post(`${AuthURL}/login`, userData);
 
       const token = response.data.token;
+      const user = response.data.user;
 
       localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(user));
+
+      console.log(token, user);
+      console.log(typeof user);
 
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
