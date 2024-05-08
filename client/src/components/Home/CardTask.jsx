@@ -3,7 +3,16 @@ import DataContext from "@/src/state/DataContext";
 import PinIcon from "../Icons/PinIcon";
 import ModalTask from "./ModalTask";
 
-const CardTask = ({ children, cardConfig, titleConfig, textConfig }) => {
+const CardTask = ({
+  children,
+  cardConfig,
+  titleConfig,
+  textConfig,
+  title,
+  description,
+}) => {
+  const [titleModal, setTitleModal] = useState(title);
+  const [descriptionModal, setDescriptionModal] = useState(description);
   const { viewStyle, setViewStyle } = useContext(DataContext);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -38,15 +47,15 @@ const CardTask = ({ children, cardConfig, titleConfig, textConfig }) => {
         onClick={openModal}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        className={`w-full ${
+        className={`w-full ${cardConfig} ${
           viewStyle == "flex" ? "md:w-[200px]" : "md:w-full"
         }  h-[450px] md:h-[350px] flex flex-col rounded-md  p-2 overflow-hidden  ${
           isHovered ? "shadow-md shadow-zinc-500" : ""
-        } ${cardConfig}`}
+        } `}
       >
         <div className="w-full flex justify-between items-center">
           <span className={`text-[18px] font-[500] ${titleConfig}`}>
-            Hello World
+            {title}
           </span>
 
           <div
@@ -59,15 +68,20 @@ const CardTask = ({ children, cardConfig, titleConfig, textConfig }) => {
         </div>
 
         <p className={`w-full leading-relaxed ali mt-3 p-0 m-0 ${textConfig}`}>
-          the last week i and my if family go to the beach with ours parents in
-          california thwe last weekend whewr dffdfd wewew
+          {description}
         </p>
       </div>
 
       <ModalTask
+        title={title}
+        description={description}
         modalOpen={modalOpen}
         modalRef={modalRef}
         cardConfig={cardConfig}
+        titleModal={titleModal}
+        descriptionModal={descriptionModal}
+        setDescriptionModal={setDescriptionModal}
+        setTitleModal={setTitleModal}
       />
     </>
   );

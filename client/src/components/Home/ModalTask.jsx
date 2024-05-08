@@ -4,8 +4,14 @@ const ModalTask = ({
   modalOpen,
   modalRef,
   cardConfig,
+  title,
+  description,
   titleConfig,
   textConfig,
+  titleModal,
+  descriptionModal,
+  setDescriptionModal,
+  setTitleModal,
 }) => {
   return (
     <AnimatePresence>
@@ -37,6 +43,8 @@ const ModalTask = ({
                     className={`w-full h-[40px] px-3 rounded-md text-[18px] font-[500] text-zinc-900 placeholder:text-zinc-700 focus:outline-none ${cardConfig}`}
                     type="text"
                     placeholder="Title"
+                    value={titleModal}
+                    onChange={(e) => setTitleModal(e.target.value)}
                   />
                 </div>
 
@@ -48,6 +56,8 @@ const ModalTask = ({
                   cols="30"
                   rows="10"
                   placeholder="Create a note..."
+                  value={descriptionModal}
+                  onChange={(e) => setDescriptionModal(e.target.value)}
                 ></textarea>
               </div>
             </div>

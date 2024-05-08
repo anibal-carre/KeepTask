@@ -36,12 +36,12 @@ const TaskContainer = () => {
             No Tasks ...
           </span>
         ) : (
-          tasks.map((task) => (
+          tasks.map((task, i) => (
             <CardTask
-              key={task._id}
+              key={i}
               cardConfig={task.bg_color}
-              titleConfig={task.title}
-              textConfig={task.description}
+              title={task.title}
+              description={task.description}
             />
           ))
         )}
