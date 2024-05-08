@@ -41,10 +41,11 @@ export const findTask = async (req, res) => {
 };
 
 export const editTask = async (req, res) => {
+  const findTask = await Task.findOne({ _id: req.params._id });
   const task = await Task.findByIdAndUpdate(req.params._id, {
     title: req.body.title ? req.body.title : task.title,
     description: req.body.description ? req.body.description : task.description,
-    bg_color: req.body.bg_color ? req.body.bg_color : "blue",
+    bg_color: req.body.bg_color ? req.body.bg_color : findTask.bg_color,
     text_color: req.body.text_color ? req.body.text_color : "color-black",
     text_font: req.body.text_font ? req.body.text_font : "font-mono",
     fixed: req.body.fixed ? req.body.fixed : false,
